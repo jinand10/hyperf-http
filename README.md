@@ -1,1 +1,5 @@
-master 保持和官方同步, dev 分支进行 `composer i` 后进行代码测试
+hyperf-http-server服务
+
+1、ORM添加remember缓存机制
+    $this->model()->where(['id' => $id])->remember(10)->first();
+    $this->model()->where(['id' => $id])->remember(10)->get();
