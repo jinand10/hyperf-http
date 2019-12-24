@@ -82,4 +82,14 @@ class UserController extends AbstractController
             $this->userService->login($params['phone'], $params['password'])
         );
     }
+
+    /**
+     * @RequestMapping(path="info", methods="get")
+     */
+    public function info()
+    {
+        return $this->response->success(
+            $this->userService->info((int)$this->request->input('uid', 0))
+        );
+    }
 }

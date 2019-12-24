@@ -8,6 +8,10 @@ use App\Constants\ApiCode;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 
+/**
+ * Class Response
+ * @author jin <jinand10@163.com>
+ */
 class Response
 {
     /**

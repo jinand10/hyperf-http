@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use App\Kernel\Database\QueryBuilder;
+
 /**
  * @property int $id
  * @property string $name 用户名

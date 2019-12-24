@@ -12,29 +12,35 @@ declare(strict_types=1);
 
 namespace App\Exception\Handler;
 
-use Hyperf\Contract\StdoutLoggerInterface;
+use App\Constants\ApiCode;
+use App\Kernel\Http\Response;
+use Hyperf\Di\Annotation\Inject;
 use Hyperf\ExceptionHandler\ExceptionHandler;
-use Hyperf\HttpMessage\Stream\SwooleStream;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 class AppExceptionHandler extends ExceptionHandler
 {
     /**
-     * @var StdoutLoggerInterface
+     * @Inject
+     * @var Response
      */
-    protected $logger;
-
-    public function __construct(StdoutLoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
+    protected $response;
 
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
-        $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
-        $this->logger->error($throwable->getTraceAsString());
-        return $response->withStatus(500)->withBody(new SwooleStream('Internal Server Error.'));
+        $msg = sprintf('%s in %s(%s)', $throwable->getMessage(), $throwable->getFile(), $throwable->getLine());
+        $trace = $throwable->getTraceAsString();
+        if (config('app_env') == 'local') {
+            stdoutLogger()->error($msg);
+            stdoutLogger()->error($trace);
+        } else {
+            logger()->error($msg);
+            logger()->error($trace);
+        }
+        // 阻止异常冒泡
+        $this->stopPropagation();
+        return $this->response->fail(ApiCode::SERVER_ERROR, ApiCode::getMessage(ApiCode::SERVER_ERROR));
     }
 
     public function isValid(Throwable $throwable): bool

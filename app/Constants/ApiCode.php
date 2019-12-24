@@ -26,6 +26,11 @@ class ApiCode extends AbstractConstants
     const SUCCESS = 1;
 
     /**
+     * @Message("服务器正在维护，稍后再试~")
+     */
+    const SERVER_ERROR = 500;
+
+    /**
      * @Message("参数错误")
      */
     const PARAMS_ERROR = 700;

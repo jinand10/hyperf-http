@@ -9,29 +9,10 @@ use Hyperf\Redis\RedisFactory;
 use Hyperf\Utils\ApplicationContext;
 use Hyperf\Cache\Annotation\Cacheable;
 
-class UserDao
+class UserDao extends Dao
 {
-    /**
-     * 新增用户
-     * @param string $name
-     * @param string $password
-     * @param string $phone
-     * @return int
-     */
-    public function insertGetUid(string $name, string $password, string $phone): int
-    {
-        return UserModel::query()->insertGetId([
-            'name' => $name,
-            'password' => $password,
-            'phone' => $phone,
-            'create_time' => time(),
-            'update_time' => time(),
-        ]);
-    }
+    protected $model = UserModel::class;
 
-    public function getUserInfo(array $where, $columns = ['*'])
-    {
-        $data = UserModel::query()->where($where)->first($columns);
-        return $data;
-    }
+    protected $name = '用户';
+
 }

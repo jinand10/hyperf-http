@@ -30,14 +30,9 @@ class ApiExceptionHandler extends ExceptionHandler
 
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
-        // 格式化输出
-        $data = json_encode(
-            $this->response->apiErrorFormat($throwable->getCode(), $throwable->getMessage()),
-            JSON_UNESCAPED_UNICODE
-        );
         // 阻止异常冒泡
         $this->stopPropagation();
-        return $response->withStatus(200)->withBody(new SwooleStream($data));
+        return $this->response->fail($throwable->getCode(), $throwable->getMessage());
     }
 
     public function isValid(Throwable $throwable): bool

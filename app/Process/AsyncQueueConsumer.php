@@ -16,7 +16,7 @@ use Hyperf\AsyncQueue\Process\ConsumerProcess;
 use Hyperf\Process\Annotation\Process;
 
 /**
- * @Process
+ * @Process(name="AsyncQueue")
  */
 class AsyncQueueConsumer extends ConsumerProcess
 {
