@@ -28,4 +28,8 @@ return [
             LogLevel::WARNING,
         ],
     ],
+    'bee_id' => env('BEE_ID', 0),
+    'bee_client_key' => env('BEE_CLIENT_KEY', ''),
+    'bee_server_key' => env('BEE_SERVER_KEY', ''),
+    'bee_ops_key' => env('BEE_OPS_KEY', ''),
 ];

@@ -48,7 +48,7 @@ class UserController extends AbstractController
      */
     public function register()
     {
-        $params = json_decode((string)$this->request->getBody(), true);
+        $params = $this->request->getParsedBody();
         $validator = $this->validationFactory->make(
             $params,
             $this->userValidation->registerRule(),
@@ -68,7 +68,7 @@ class UserController extends AbstractController
      */
     public function login()
     {
-        $params = json_decode((string)$this->request->getBody(), true);
+        $params = $this->request->getParsedBody();
         $validator = $this->validationFactory->make(
             $params,
             $this->userValidation->loginRule(),

@@ -31,9 +31,14 @@ class ApiCode extends AbstractConstants
     const SERVER_ERROR = 500;
 
     /**
+     * @Message("签名错误")
+     */
+    const SIGN_ERROR = 700;
+
+    /**
      * @Message("参数错误")
      */
-    const PARAMS_ERROR = 700;
+    const PARAMS_ERROR = 701;
 
     /**
      * @Message("用户名或密码错误")
