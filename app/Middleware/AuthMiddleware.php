@@ -68,7 +68,7 @@ class AuthMiddleware implements MiddlewareInterface
          * 校验请求签名
          */
         if (!$this->verifySign($caller, $data, $time, $sign)) {
-            throw new ApiException(ApiCode::SIGN_ERROR);
+//            throw new ApiException(ApiCode::SIGN_ERROR);
         }
         return $handler->handle($request);
     }
