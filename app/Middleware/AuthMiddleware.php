@@ -63,7 +63,7 @@ class AuthMiddleware implements MiddlewareInterface
         /**
          * 调用者 1客户端 2服务端 3运维
          */
-        $caller = (int)($this->request->query('caller', 1));
+        $caller = (int)($this->request->query('caller', GeneralCode::CALLER_CLIENT));
         /**
          * 校验请求签名
          */
